@@ -42,7 +42,7 @@ const Modal = ({ onRequestClose, id }) => {
 
 		const getAllSlots = () => {
 			console.log("inside get slots");
-			fetch(`http://3.141.169.39/appointmentservice/api/slot/expertslot/${id}`)
+			fetch(`http://3.12.166.111/appointmentservice/api/slot/expertslot/${id}`)
 		.then(res=>res.json())
 		.then(jsondata=>setData(jsondata))
 		//.then(response=>setData(response))
@@ -58,13 +58,13 @@ const Modal = ({ onRequestClose, id }) => {
 		// setData(temp)
 		// const temp = data.filter(item => item.schedule_Id != id);
 		const FetchFunc =
-    axios.get(`http://3.141.169.39/userservice/api/v1/expertprofile/${item.expertId}`)
+    axios.get(`http://3.12.166.111/userservice/api/v1/expertprofile/${item.expertId}`)
       .then((res) => res.json())
       .then((response) => 
         setExpertProfile(response)
       )
       .catch((err) => {});
-    const res = axios.post("http://3.141.169.39/appointmentservice/api/appointment/save", {
+    const res = axios.post("http://3.12.166.111/appointmentservice/api/appointment/save", {
       	appointmentId: "",
 		userEmailId: emailId,
 		expertEmailId: item.expertId,
@@ -81,7 +81,7 @@ const Modal = ({ onRequestClose, id }) => {
     ).then(res => {
 		toast("Booking Successfull",{type: "success"})
 		toast("Email Confirmation sent",{type: "success"})
-		const updateSlot = axios.put("http://3.141.169.39/appointmentservice/api/slot/update", {
+		const updateSlot = axios.put("http://3.12.166.111/appointmentservice/api/slot/update", {
 			scheduleId: item.scheduleId,
 			expertId: item.expertId,
 			scheduleDate: item.scheduleDate,
