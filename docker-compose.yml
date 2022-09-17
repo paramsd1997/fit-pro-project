@@ -21,7 +21,13 @@ services:
     ports:
       - 27017:27017
 
-
+  configserver:
+    container_name: config-server-container
+    build: config-server/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8888:8888
 
   eurekaserver:
     container_name: eureka-server-container
