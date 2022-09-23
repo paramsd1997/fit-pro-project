@@ -129,7 +129,7 @@ services:
       - enthusiast_redirect_url=http://localhost:8083/api/v1/authorize/enthusiast/complete
       - expert_redirect_url=http://localhost:8083/api/v1/authorize/expert/complete
       - Domain=localhosteureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
-      - logout_redirect_url = http://localhost:8087/#/
+      - logout_redirect_url=http://localhost:8087/#/
     ports:
       - 8083:8083
     depends_on:
