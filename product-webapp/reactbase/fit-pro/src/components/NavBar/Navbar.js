@@ -27,7 +27,7 @@ export default function Navbar() {
     <img src={LOGO} style={{"width":"70px", marginLeft:"50px"}} onClick={handleClickLogo}/>
     
     </a>
-    <h4>Fit Pro</h4>
+    <h4>GL Fit Pro</h4>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">

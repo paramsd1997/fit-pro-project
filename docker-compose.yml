@@ -5,8 +5,6 @@ services:
     ports:
       - 3306:3306
     container_name: mysql-container
-    network_mode: host
-    hostname: localhost
     environment:
       MYSQL_ROOT_PASSWORD: Global@145#
       MYSQL_DATABASE: AuthenticationDB
@@ -17,16 +15,12 @@ services:
   mongodbservice:
     image: mongo:latest
     container_name: mongo-container
-    network_mode: host
-    hostname: localhost
     ports:
       - 27017:27017
 
   configserver:
     container_name: config-server-container
     build: config-server/
-    hostname: localhost
-    network_mode: host
     environment:
       - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
     ports:
@@ -35,16 +29,12 @@ services:
   eurekaserver:
     container_name: eureka-server-container
     build: eureka-server/
-    hostname: localhost
-    network_mode: host
     ports:
       - 8761:8761
 
   api-gateway:
     container_name: api-gateway-container
     build: api-gateway/
-    hostname: localhost
-    network_mode: host
     environment:
       - eureka.client.service-url.defaultZone=http://localhost:8761/eureka
       - paymentservicesvc=localhost
@@ -59,8 +49,6 @@ services:
   authenticationservice:
     container_name: authentication-service-container
     build: authentication-service/
-    hostname: localhost
-    network_mode: host
     environment:
       - spring.datasource.url=jdbc:mysql://127.0.0.1:3306/AuthenticationDB
     ports:
@@ -74,8 +62,6 @@ services:
   emailservice:
     container_name: email-service-container
     build: email-service/
-    hostname: localhost
-    network_mode: host
     environment:
       - spring.rabbitmq.host=localhost
     ports:
@@ -90,8 +76,6 @@ services:
   appointmentservice:
     container_name: appointment-service-container
     build: appointment-service/
-    hostname: localhost
-    network_mode: host
     environment:
       - spring.data.mongodb.uri=mongodb://localhost:27017/fitpro
       - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
@@ -106,8 +90,6 @@ services:
   paymentservice:
     container_name: payment-service-container
     build: payment-service/
-    hostname: localhost
-    network_mode: host
     environment:
       - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
     ports:
@@ -121,8 +103,6 @@ services:
   userservice:
     container_name: user-service-container
     build: user-service/
-    hostname: localhost
-    network_mode: host
     environment:
       - enthusiast_home_page_url=http://localhost:8087/#/innovators
       - expert_home_page_url=http://localhost:8087/#/experts
@@ -143,8 +123,6 @@ services:
     image: product-webapp
     restart: always
     container_name: product-webapp
-    network_mode: host
-    hostname: localhost
     environment:
       - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
     ports:
