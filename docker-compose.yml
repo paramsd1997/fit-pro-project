@@ -22,7 +22,7 @@ services:
     container_name: config-server-container
     build: config-server/
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka/
     ports:
       - 8888:8888
 
@@ -36,13 +36,13 @@ services:
     container_name: api-gateway-container
     build: api-gateway/
     environment:
-      - eureka.client.service-url.defaultZone=http://localhost:8761/eureka
-      - paymentservicesvc=localhost
-      - authenticationservicesvc=localhost
-      - emailservicesvc=localhost
-      - appointmentservicesvc=localhost
-      - userservicesvc=localhost
-      - productwebappsvc=localhost
+      - eureka.client.service-url.defaultZone=http://eurekaserver:8761/eureka
+      - paymentservicesvc=paymentservice
+      - authenticationservicesvc=authenticationservice
+      - emailservicesvc=emailservice
+      - appointmentservicesvc=appointmentservice
+      - userservicesvc=userservice
+      - productwebappsvc=product-webapp
     ports:
       - 8080:8080
 
@@ -50,7 +50,7 @@ services:
     container_name: authentication-service-container
     build: authentication-service/
     environment:
-      - spring.datasource.url=jdbc:mysql://127.0.0.1:3306/AuthenticationDB
+      - spring.datasource.url=jdbc:mysql://mysqlservice:3306/AuthenticationDB
     ports:
       - 8091:8091
     depends_on:
@@ -63,7 +63,7 @@ services:
     container_name: email-service-container
     build: email-service/
     environment:
-      - spring.rabbitmq.host=localhost
+      - spring.rabbitmq.host=rabbitmq
     ports:
       - 8088:8088
     depends_on:
@@ -77,8 +77,8 @@ services:
     container_name: appointment-service-container
     build: appointment-service/
     environment:
-      - spring.data.mongodb.uri=mongodb://localhost:27017/fitpro
-      - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+      - spring.data.mongodb.uri=mongodb://mongodbservice:27017/fitpro
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka/
     ports:
       - 8090:8090
     depends_on:
@@ -91,7 +91,7 @@ services:
     container_name: payment-service-container
     build: payment-service/
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka/
     ports:
       - 8089:8089
     depends_on:
@@ -104,12 +104,12 @@ services:
     container_name: user-service-container
     build: user-service/
     environment:
-      - enthusiast_home_page_url=http://localhost:8087/#/innovators
-      - expert_home_page_url=http://localhost:8087/#/experts
-      - enthusiast_redirect_url=http://localhost:8083/api/v1/authorize/enthusiast/complete
-      - expert_redirect_url=http://localhost:8083/api/v1/authorize/expert/complete
-      - Domain=localhosteureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
-      - logout_redirect_url=http://localhost:8087/#/
+      - enthusiast_home_page_url=http://product-webapp:8087/#/innovators
+      - expert_home_page_url=http://product-webapp:8087/#/experts
+      - enthusiast_redirect_url=http://userservice:8083/api/v1/authorize/enthusiast/complete
+      - expert_redirect_url=http://userservice:8083/api/v1/authorize/expert/complete
+      - Domain=localhosteureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka/
+      - logout_redirect_url=http://product-webapp:8087/#/
     ports:
       - 8083:8083
     depends_on:
@@ -124,7 +124,7 @@ services:
     restart: always
     container_name: product-webapp
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka/
     ports:
       - 8087:8087
     depends_on:
