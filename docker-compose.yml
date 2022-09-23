@@ -108,8 +108,10 @@ services:
       - expert_home_page_url=http://product-webapp:8087/#/experts
       - enthusiast_redirect_url=http://userservice:8083/api/v1/authorize/enthusiast/complete
       - expert_redirect_url=http://userservice:8083/api/v1/authorize/expert/complete
-      - Domain=localhosteureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka/
+      - Domain=localhosteureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
       - logout_redirect_url=http://product-webapp:8087/#/
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+      - spring.data.mongodb.host=mongodbservice
     ports:
       - 8083:8083
     depends_on:
