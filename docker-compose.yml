@@ -44,7 +44,7 @@ services:
       - userservicesvc=userservice
       - productwebappsvc=product-webapp
     ports:
-      - 8080:8080
+      - 8099:8080
 
   authenticationservice:
     container_name: authentication-service-container
